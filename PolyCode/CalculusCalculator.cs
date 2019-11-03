@@ -28,7 +28,7 @@ namespace MP2
         /// <returns>True if the polynomial is succeffully set, false otherwise.</returns>
         public bool SetPolynomial()
         {
-
+            // MATTY
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace MP2
         /// <returns>True if a valid polynomial, false otherwise.</returns>
         public bool IsValidPolynomial(string polynomial)
         {
-
+            // MATTY
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace MP2
         /// </exception>
         public string GetPolynomialString()
         {
-
+            //MATTY
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace MP2
         /// </exception>
         public double EvaluatePolynomial(double x)
         {
-
+            // MATTY
         }
 
         /// <summary>
@@ -113,6 +113,7 @@ namespace MP2
             }
 
             return Math.Round(x, 4); //4 decimal places
+            // YUDAN
         }
 
         /// <summary>
@@ -132,7 +133,7 @@ namespace MP2
         /// </exception>
         public List<double> GetAllRoots(double epsilon)
         {
-
+            // YUDAN
         }
 
         /// <summary>
@@ -148,7 +149,7 @@ namespace MP2
         /// </exception>
         public double EvaluatePolynomialDerivative(double x)
         {
-
+            // YUDAN
         }
 
         /// <summary>
@@ -165,7 +166,7 @@ namespace MP2
         /// </exception>
         public double EvaluatePolynomialIntegral(double a, double b)
         {
-
+            // YUDAN
         }
     }
 }
