@@ -163,25 +163,19 @@ namespace MP2
             {
                 throw new InvalidOperationException ("No polymial is set.");
             }
-           
-                for (int i = 0; i < order; i++)
-                {
-                    int count = 0;
-                    xMultiply = 1.0;
-                    
-                    while(count < order - i - 1)
-                    {
-                        xMultiply *= x;
-                        count ++;
-                    }
-
-                    result += coefficientList [i] * (order - i) * xMultiply;
-
-                }
             
-           
-
-
+            for (int i = 0; i < order; i++)
+            {
+                int count = 0;
+                xMultiply = 1.0;
+                while(count < order - i - 1)
+                {
+                    xMultiply *= x;
+                    count ++;
+                }
+                result += coefficientList [i] * (order - i) * xMultiply;
+            }
+            return result;
             // YUDAN
         }
 
