@@ -219,12 +219,23 @@ namespace MP2
         /// </exception>
         public List<double> GetAllRoots(double epsilon) 
         {
+
+            if (coefficientList.Count == 0)
+            {
+                throw new InvalidOperationException("No polynomial is set.");
+            }
+
+            double x;
+            List<double> result = new List<double>();
+
+
             for(double guess = -50.0;guess<=5;guess+=0.5) //What does "step is -0.5" mean
             {
-                double x=NewtonRaphson(guess,epsilon,10);
+                x = NewtonRaphson(guess,epsilon,10);
+                result.Add(x);
             }
-            
-            Console.WriteLine ($"x={x}");
+
+            return result;
             // YUDAN
         }
 
