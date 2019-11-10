@@ -131,8 +131,14 @@ namespace MP2
         /// Thrown if the polynomial field is empty. 
         /// Exception message used: "No polynomial is set."
         /// </exception>
-        public List<double> GetAllRoots(double epsilon)
+        public List<double> GetAllRoots(double epsilon) 
         {
+            for(double guess = -50.0;guess<=5;guess+=0.5) //What does "step is -0.5" mean
+            {
+                double x=NewtonRaphson(guess,epsilon,10);
+            }
+            
+            Console.WriteLine ($"x={x}");
             // YUDAN
         }
 
@@ -149,6 +155,33 @@ namespace MP2
         /// </exception>
         public double EvaluatePolynomialDerivative(double x)
         {
+            double result = 0;
+            double xMultiply;
+            double order = coefficientList.Count - 1;
+
+            if (coefficientList.Count == 0) //polynomial field is empty??????
+            {
+                throw new InvalidOperationException ("No polymial is set.");
+            }
+           
+                for (int i = 0; i < order; i++)
+                {
+                    int count = 0;
+                    xMultiply = 1.0;
+                    
+                    while(count < order - i - 1)
+                    {
+                        xMultiply *= x;
+                        count ++;
+                    }
+
+                    result += coefficientList [i] * (order - i) * xMultiply;
+
+                }
+            
+           
+
+
             // YUDAN
         }
 
@@ -166,6 +199,13 @@ namespace MP2
         /// </exception>
         public double EvaluatePolynomialIntegral(double a, double b)
         {
+            if (coefficientList.Count == 0) //polynomial field is empty??????
+            {
+                throw new InvalidOperationException ("No polymial is set.");
+            }
+
+            return EvaluatePolynomialDerivative(b)-EvaluatePolynomialDerivative(a);
+
             // YUDAN
         }
     }
