@@ -28,7 +28,37 @@ namespace MP2
         /// <returns>True if the polynomial is succeffully set, false otherwise.</returns>
         public bool SetPolynomial()
         {
-            // MATTY
+            StringBuilder number = new StringBuilder();
+            coefficientList.Clear();
+
+            Console.WriteLine( Environment.NewLine + "Enter all coefficients for a polynomial in descending order seperated by spaces.");
+            polynomial = Console.ReadLine().Trim();
+
+            if (IsValidPolynomial(polynomial))
+            {
+                for (int i = 0; i < polynomial.Length; i++)
+                {
+                    if (polynomial[i] != ' ')
+                    {
+                        number.Append(polynomial[i]);
+                    }
+                    else if (polynomial[i] == ' ' && number.Length>0)
+                    {
+                        coefficientList.Add(Double.Parse(number.ToString()));
+                        number.Clear();
+                    }
+                }
+                coefficientList.Add(Double.Parse(number.ToString()));
+            }
+            else
+            {
+                return false;
+            }
+            foreach (double item in coefficientList)
+            {
+                Console.Write($"{item} ");
+            }
+            return true;
         }
 
         /// <summary>
@@ -47,7 +77,25 @@ namespace MP2
         /// <returns>True if a valid polynomial, false otherwise.</returns>
         public bool IsValidPolynomial(string polynomial)
         {
-            // MATTY
+            if (polynomial.Contains("--") || polynomial.Contains("..") ||
+                polynomial.Contains("- ") || polynomial.Contains(". ") ||
+                polynomial.Contains("-. ") || polynomial.Contains(".-") ||
+                polynomial.Trim() == "-" || polynomial.Trim() == "." )
+            {
+                return false;
+            }
+            for (int i = 0; i<polynomial.Length; i++ )
+            {
+                char j = polynomial[i];
+                if(j!='0' && j!='1' && j != '2' && j != '3' 
+                    && j != '4' && j != '5' && j != '6' 
+                    && j != '7' && j != '8' && j != '9' 
+                    && j != '-' && j != '.' && j != ' ')
+                {
+                    return false; 
+                }
+            }
+            return true;
         }
 
         /// <summary>
@@ -65,7 +113,37 @@ namespace MP2
         /// </exception>
         public string GetPolynomialString()
         {
-            //MATTY
+            if (polynomial == "")
+            {
+                throw new InvalidCastException("No Polynomial is set");
+            }
+            else
+            {
+                StringBuilder poly = new StringBuilder();
+                int length = coefficientList.Count;
+                int j = 0;
+                
+                for (int i = length - 1; i >= 0; i--)
+                {
+                    if (coefficientList[j] != 0)
+                    {
+                        if (i == 0)
+                        {
+                            poly.Append($" ({coefficientList[j]})");
+                        }
+                        else if (i == 1)
+                        {
+                            poly.Append($"({coefficientList[j]})*x");
+                        }
+                        else
+                        {
+                            poly.Append($"({coefficientList[j]})*x^{i} ");
+                        }
+                    }
+                    j++;
+                }
+                return poly.ToString();
+            }
         }
 
         /// <summary>
@@ -79,7 +157,15 @@ namespace MP2
         /// </exception>
         public double EvaluatePolynomial(double x)
         {
-            // MATTY
+            double evaluation = 0;
+            int j = 0;
+
+            for(int i = coefficientList.Count - 1; i >= 0; i++)
+            {
+                evaluation += (coefficientList[j]) * Math.Pow(x, i);
+                j++;
+            }
+            return evaluation;
         }
 
         /// <summary>
@@ -113,7 +199,7 @@ namespace MP2
             }
 
             return Math.Round(x, 4); //4 decimal places
-            // YUDAN
+            
         }
 
         /// <summary>
@@ -133,7 +219,7 @@ namespace MP2
         /// </exception>
         public List<double> GetAllRoots(double epsilon)
         {
-            // YUDAN
+            
         }
 
         /// <summary>
@@ -149,7 +235,7 @@ namespace MP2
         /// </exception>
         public double EvaluatePolynomialDerivative(double x)
         {
-            // YUDAN
+            
         }
 
         /// <summary>
@@ -166,7 +252,7 @@ namespace MP2
         /// </exception>
         public double EvaluatePolynomialIntegral(double a, double b)
         {
-            // YUDAN
+            
         }
     }
 }
