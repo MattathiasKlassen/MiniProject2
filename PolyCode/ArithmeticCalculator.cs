@@ -69,16 +69,6 @@ namespace MP2
                 {
                     numbersList.Add(number);
                 }
-                /*
-                else if (element == "+" ||
-                         element == "-" ||
-                         element == "*" ||
-                         element == "/" ||
-                         element == "^")
-                {
-
-                }
-                */
             }
 
             for (int i = 2; i < lengthString; i += 2)
