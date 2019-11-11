@@ -305,7 +305,38 @@ namespace MP2
                 throw new InvalidOperationException ("No polymial is set.");
             }
 
-            return EvaluatePolynomialDerivative(b)-EvaluatePolynomialDerivative(a);
+            double Fa = 0;
+            double Fb = 0;
+            double aMultiply;
+            double bMultiply;
+            double order = coefficientList.Count - 1;
+
+            for (int i = 0; i <= order; i++)
+            {
+                int count = 0;
+                aMultiply = 1.0;
+                while (count <= order - i)
+                {
+                    aMultiply *= a;
+                    count++;
+                }
+                Fa += coefficientList[i] / (order - i + 1) * aMultiply;
+            }
+
+            for (int j = 0; j <= order; j++)
+            {
+                int count = 0;
+                bMultiply = 1.0;
+                while (count <= order - j)
+                {
+                    bMultiply *= b;
+                    count++;
+                }
+                Fb += coefficientList[j] / (order - j + 1) * bMultiply;
+            }
+
+
+            return Fb - Fa;
 
             // YUDAN
         }
