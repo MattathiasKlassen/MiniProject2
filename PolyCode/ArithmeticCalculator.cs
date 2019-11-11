@@ -86,27 +86,27 @@ namespace MP2
                 if (elements[i] == "+")
                 {
                     answer += numbersList[i / 2];
-                    arithmeticExpression.Append("+" + numbersList[i / 2] + ")");
+                    arithmeticExpression.Append(" +" + numbersList[i / 2] + ")");
                 }
                 else if (elements[i] == "-")
                 {
                     answer -= numbersList[i / 2];
-                    arithmeticExpression.Append("-" + numbersList[i / 2] + ")");
+                    arithmeticExpression.Append(" -" + numbersList[i / 2] + ")");
                 }
                 else if (elements[i] == "*")
                 {
                     answer *= numbersList[i / 2];
-                    arithmeticExpression.Append("*" + numbersList[i / 2] + ")");
+                    arithmeticExpression.Append(" *" + numbersList[i / 2] + ")");
                 }
                 else if (elements[i] == "/")
                 {
                     answer /= numbersList[i / 2];
-                    arithmeticExpression.Append("/" + numbersList[i / 2] + ")");
+                    arithmeticExpression.Append(" /" + numbersList[i / 2] + ")");
                 }
                 else if (elements[i] == "^")
                 {
                     answer = Math.Pow(answer, numbersList[i / 2]);
-                    arithmeticExpression.Append("^" + numbersList[i / 2] + ")");
+                    arithmeticExpression.Append(" ^" + numbersList[i / 2] + ")");
                 }
                 else
                 {
@@ -115,8 +115,8 @@ namespace MP2
 
             }
 
-            arithmeticExpression.Remove(arithmeticExpression.Length, 1);
-            arithmeticExpression.Append("=" + answer);
+            arithmeticExpression.Remove(arithmeticExpression.Length - 1, 1);
+            arithmeticExpression.Append(" = " + answer);
 
             return arithmeticExpression.ToString();
         }
