@@ -229,13 +229,15 @@ namespace MP2
             List<double> result = new List<double>();
 
 
-            for(double guess = -50.0;guess<=5;guess+=0.5) //What does "step is -0.5" mean
+            for(double guess = -50.0; guess <= 5; guess += 0.5) //What does "step is 0.5" mean
             {
                 x = NewtonRaphson(guess,epsilon,10);
-                result.Add(x);
+                
+                if (x!=double.NaN)
+                    result.Add(x);
             }
-
             return result;
+
             // YUDAN
         }
 

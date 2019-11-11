@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29409.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolyCode", "PolyCode.csproj", "{0AE828D1-9089-4B49-95D9-7CE3A81DC537}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolyCodeTests", "..\PolyCodeTests\PolyCodeTests.csproj", "{C7127F94-0B03-4ED5-9222-CFF4A3CA3EAC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolyCodeTests1", "..\PolyCodeTests1\PolyCodeTests1.csproj", "{FEED23E9-D9DB-4886-8F4C-6A649D0F3380}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{0AE828D1-9089-4B49-95D9-7CE3A81DC537}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AE828D1-9089-4B49-95D9-7CE3A81DC537}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AE828D1-9089-4B49-95D9-7CE3A81DC537}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C7127F94-0B03-4ED5-9222-CFF4A3CA3EAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C7127F94-0B03-4ED5-9222-CFF4A3CA3EAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C7127F94-0B03-4ED5-9222-CFF4A3CA3EAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C7127F94-0B03-4ED5-9222-CFF4A3CA3EAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEED23E9-D9DB-4886-8F4C-6A649D0F3380}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEED23E9-D9DB-4886-8F4C-6A649D0F3380}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEED23E9-D9DB-4886-8F4C-6A649D0F3380}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEED23E9-D9DB-4886-8F4C-6A649D0F3380}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
