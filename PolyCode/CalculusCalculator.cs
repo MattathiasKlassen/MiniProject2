@@ -36,19 +36,25 @@ namespace MP2
 
             if (IsValidPolynomial(polynomial))
             {
-                for (int i = 0; i < polynomial.Length; i++)
+                string[] elements = polynomial.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                for (int i = 0; i<elements.Length; i++)
                 {
-                    if (polynomial[i] != ' ')
-                    {
-                        number.Append(polynomial[i]);
-                    }
-                    else if (polynomial[i] == ' ' && number.Length>0)
-                    {
-                        coefficientList.Add(Double.Parse(number.ToString()));
-                        number.Clear();
-                    }
+                    coefficientList.Add(Double.Parse(elements[i].ToString()));
                 }
-                coefficientList.Add(Double.Parse(number.ToString()));
+                //for (int i = 0; i < polynomial.Length; i++)
+                //{
+                //    if (polynomial[i] != ' ')
+                //    {
+                //        number.Append(polynomial[i]);
+                //    }
+                //    else if (polynomial[i] == ' ' && number.Length>0)
+                //    {
+                //        coefficientList.Add(Double.Parse(number.ToString()));
+                //        number.Clear();
+                //    }
+                //}
+                //coefficientList.Add(Double.Parse(number.ToString()));
             }
             else
             {
