@@ -12,12 +12,7 @@ namespace MP2.Tests
     public class CalculusCalculatorTests
     {
         [TestMethod()]
-        public void 
-            
-            
-            
-            
-            ()
+        public void SetPolynomialTest()
         {
             Assert.Fail();
         }

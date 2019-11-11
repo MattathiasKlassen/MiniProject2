@@ -239,7 +239,6 @@ namespace MP2
                 }
             }
 
-            return result;
             // YUDAN
         }
 
