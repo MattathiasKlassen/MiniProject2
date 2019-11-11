@@ -330,7 +330,6 @@ namespace MP2
 
             return Fb - Fa;
 
-            // YUDAN
         }
     }
 }
