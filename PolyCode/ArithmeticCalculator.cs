@@ -4,6 +4,8 @@
 //You should implement the BasicArithmetic method.
 
 using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace MP2
 {
@@ -37,8 +39,86 @@ namespace MP2
             string expression = Console.ReadLine().Trim();
             string[] elements = expression.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-            // To implement
-            // JESSICA
+            double answer; 
+            int lengthString = elements.Length;
+
+            List<double> numbersList = new List<double>();
+            List<char> operandsList = new List<char>();
+
+            StringBuilder arithmeticExpression = new StringBuilder();  
+
+            if (!double.TryParse(elements[0], out double number))
+            {
+                return "Invalid Expression.";
+            }
+            else
+            {
+                for(int j = 0 ; j < lengthString/2 - 1; j++)
+                {
+                    arithmeticExpression.Append("(");
+                }
+                arithmeticExpression.Append(number);
+                answer = number;
+               
+            }
+
+            foreach (string element in elements)
+            {
+                if (double.TryParse(element, out number))
+                {
+                    numbersList.Add(number);
+                }
+                /*
+                else if (element == "+" ||
+                         element == "-" ||
+                         element == "*" ||
+                         element == "/" ||
+                         element == "^")
+                {
+
+                }
+                */
+            }
+
+            for (int i = 2; i < lengthString; i+=2)
+            {
+               if (elements[i] == "+")
+                {
+                    answer += numbersList[i/2];
+                    arithmeticExpression.Append("+" + numbersList[i / 2] + ")");
+                }
+               else if (elements[i] == "-")
+                {
+                    answer -= numbersList[i/2];
+                    arithmeticExpression.Append("-" + numbersList[i / 2] + ")");
+                }
+                else if (elements[i] == "*")
+                {
+                    answer *= numbersList[i/2];
+                    arithmeticExpression.Append("*" + numbersList[i / 2] + ")");
+                }
+                else if (elements[i] == "/")
+                {
+                    answer /= numbersList[i/2];
+                    arithmeticExpression.Append("/" + numbersList[i / 2] + ")");
+                }
+                else if (elements[i] == "^")
+                {
+                    answer = Math.Pow(answer, numbersList[i/2]);
+                    arithmeticExpression.Append("^" + numbersList[i / 2] + ")");
+                }
+               else
+                {
+                    return "Invalid Expression";
+                }
+               
+            }
+
+            arithmeticExpression.Remove(arithmeticExpression.Length, 1);
+            arithmeticExpression.Append("=" + answer);
+
+            return arithmeticExpression.ToString();
+
         }
     }
 }
