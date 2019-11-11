@@ -54,10 +54,6 @@ namespace MP2
             {
                 return false;
             }
-            foreach (double item in coefficientList)
-            {
-                Console.Write($"{item} ");
-            }
             return true;
         }
 
@@ -77,25 +73,6 @@ namespace MP2
         /// <returns>True if a valid polynomial, false otherwise.</returns>
         public bool IsValidPolynomial(string polynomial)
         {
-            //if (polynomial.Contains("--") || polynomial.Contains("..") ||
-            //    polynomial.Contains("- ") || polynomial.Contains(". ") ||
-            //    polynomial.Contains("-. ") || polynomial.Contains(".-") ||
-            //    polynomial.Trim() == "-" || polynomial.Trim() == "." )
-            //{
-            //    return false;
-            //}
-            //for (int i = 0; i<polynomial.Length; i++ )
-            //{
-            //    char j = polynomial[i];
-            //    if(j!='0' && j!='1' && j != '2' && j != '3' 
-            //        && j != '4' && j != '5' && j != '6' 
-            //        && j != '7' && j != '8' && j != '9' 
-            //        && j != '-' && j != '.' && j != ' ')
-            //    {
-            //        return false; 
-            //    }
-            //}
-            //return true;
             string[] elements = polynomial.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             for(int i = 0; i<elements.Length; i++)
@@ -167,15 +144,22 @@ namespace MP2
         /// </exception>
         public double EvaluatePolynomial(double x)
         {
-            double evaluation = 0;
-            int j = 0;
-
-            for(int i = coefficientList.Count - 1; i >= 0; i--)
+            if (polynomial == "")
             {
-                evaluation += (coefficientList[j]) * Math.Pow(x, i);
-                j++;
+                throw new InvalidCastException("No Polynomial is set");
             }
-            return evaluation;
+            else
+            {
+                double evaluation = 0;
+                int j = 0;
+
+                for (int i = coefficientList.Count - 1; i >= 0; i--)
+                {
+                    evaluation += (coefficientList[j]) * Math.Pow(x, i);
+                    j++;
+                }
+                return evaluation;
+            }
         }
 
         /// <summary>
