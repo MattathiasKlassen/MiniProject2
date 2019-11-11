@@ -240,7 +240,6 @@ namespace MP2
  
             }
             return result;
-            // YUDAN
         }
 
         /// <summary>
@@ -277,7 +276,6 @@ namespace MP2
                 result += coefficientList [i] * (order - i) * xMultiply;
             }
             return result;
-            // YUDAN
         }
 
         /// <summary>
