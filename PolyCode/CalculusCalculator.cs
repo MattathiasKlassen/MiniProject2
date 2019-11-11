@@ -36,27 +36,29 @@ namespace MP2
 
             if (IsValidPolynomial(polynomial))
             {
-                for (int i = 0; i < polynomial.Length; i++)
+                string[] elements = polynomial.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                for (int i = 0; i<elements.Length; i++)
                 {
-                    if (polynomial[i] != ' ')
-                    {
-                        number.Append(polynomial[i]);
-                    }
-                    else if (polynomial[i] == ' ' && number.Length>0)
-                    {
-                        coefficientList.Add(Double.Parse(number.ToString()));
-                        number.Clear();
-                    }
+                    coefficientList.Add(Double.Parse(elements[i].ToString()));
                 }
-                coefficientList.Add(Double.Parse(number.ToString()));
+                //for (int i = 0; i < polynomial.Length; i++)
+                //{
+                //    if (polynomial[i] != ' ')
+                //    {
+                //        number.Append(polynomial[i]);
+                //    }
+                //    else if (polynomial[i] == ' ' && number.Length>0)
+                //    {
+                //        coefficientList.Add(Double.Parse(number.ToString()));
+                //        number.Clear();
+                //    }
+                //}
+                //coefficientList.Add(Double.Parse(number.ToString()));
             }
             else
             {
                 return false;
-            }
-            foreach (double item in coefficientList)
-            {
-                Console.Write($"{item} ");
             }
             return true;
         }
@@ -77,25 +79,6 @@ namespace MP2
         /// <returns>True if a valid polynomial, false otherwise.</returns>
         public bool IsValidPolynomial(string polynomial)
         {
-            //if (polynomial.Contains("--") || polynomial.Contains("..") ||
-            //    polynomial.Contains("- ") || polynomial.Contains(". ") ||
-            //    polynomial.Contains("-. ") || polynomial.Contains(".-") ||
-            //    polynomial.Trim() == "-" || polynomial.Trim() == "." )
-            //{
-            //    return false;
-            //}
-            //for (int i = 0; i<polynomial.Length; i++ )
-            //{
-            //    char j = polynomial[i];
-            //    if(j!='0' && j!='1' && j != '2' && j != '3' 
-            //        && j != '4' && j != '5' && j != '6' 
-            //        && j != '7' && j != '8' && j != '9' 
-            //        && j != '-' && j != '.' && j != ' ')
-            //    {
-            //        return false; 
-            //    }
-            //}
-            //return true;
             string[] elements = polynomial.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             for(int i = 0; i<elements.Length; i++)
@@ -167,15 +150,22 @@ namespace MP2
         /// </exception>
         public double EvaluatePolynomial(double x)
         {
-            double evaluation = 0;
-            int j = 0;
-
-            for(int i = coefficientList.Count - 1; i >= 0; i--)
+            if (polynomial == "")
             {
-                evaluation += (coefficientList[j]) * Math.Pow(x, i);
-                j++;
+                throw new InvalidCastException("No Polynomial is set");
             }
-            return evaluation;
+            else
+            {
+                double evaluation = 0;
+                int j = 0;
+
+                for (int i = coefficientList.Count - 1; i >= 0; i--)
+                {
+                    evaluation += (coefficientList[j]) * Math.Pow(x, i);
+                    j++;
+                }
+                return evaluation;
+            }
         }
 
         /// <summary>
@@ -239,14 +229,17 @@ namespace MP2
             List<double> result = new List<double>();
 
 
-            for(double guess = -50.0;guess<=5;guess+=0.5) //What does "step is -0.5" mean
+            for(double guess = -50.0;guess<=50; guess+=0.5) //What does "step is-0.5" mean
             {
                 x = NewtonRaphson(guess,epsilon,10);
-                result.Add(x);
-            }
 
+                if (!double.IsNaN(x))
+                {
+                    result.Add(x);
+                }
+ 
+            }
             return result;
-            // YUDAN
         }
 
         /// <summary>
@@ -283,7 +276,6 @@ namespace MP2
                 result += coefficientList [i] * (order - i) * xMultiply;
             }
             return result;
-            // YUDAN
         }
 
         /// <summary>
@@ -338,7 +330,6 @@ namespace MP2
 
             return Fb - Fa;
 
-            // YUDAN
         }
     }
 }
