@@ -34,18 +34,19 @@ namespace MP2
         /// </example>
         public static string BasicArithmetic()
         {
+
             Console.WriteLine();
             Console.WriteLine("Enter an expression (Reverse Polish Notation)");
             string expression = Console.ReadLine().Trim();
             string[] elements = expression.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-            double answer; 
+            double answer;
             int lengthString = elements.Length;
 
             List<double> numbersList = new List<double>();
             List<char> operandsList = new List<char>();
 
-            StringBuilder arithmeticExpression = new StringBuilder();  
+            StringBuilder arithmeticExpression = new StringBuilder();
 
             if (!double.TryParse(elements[0], out double number))
             {
@@ -53,13 +54,13 @@ namespace MP2
             }
             else
             {
-                for(int j = 0 ; j < lengthString/2 - 1; j++)
+                for (int j = 0; j < lengthString / 2 - 1; j++)
                 {
                     arithmeticExpression.Append("(");
                 }
                 arithmeticExpression.Append(number);
                 answer = number;
-               
+
             }
 
             foreach (string element in elements)
@@ -80,45 +81,44 @@ namespace MP2
                 */
             }
 
-            for (int i = 2; i < lengthString; i+=2)
+            for (int i = 2; i < lengthString; i += 2)
             {
-               if (elements[i] == "+")
+                if (elements[i] == "+")
                 {
-                    answer += numbersList[i/2];
+                    answer += numbersList[i / 2];
                     arithmeticExpression.Append("+" + numbersList[i / 2] + ")");
                 }
-               else if (elements[i] == "-")
+                else if (elements[i] == "-")
                 {
-                    answer -= numbersList[i/2];
+                    answer -= numbersList[i / 2];
                     arithmeticExpression.Append("-" + numbersList[i / 2] + ")");
                 }
                 else if (elements[i] == "*")
                 {
-                    answer *= numbersList[i/2];
+                    answer *= numbersList[i / 2];
                     arithmeticExpression.Append("*" + numbersList[i / 2] + ")");
                 }
                 else if (elements[i] == "/")
                 {
-                    answer /= numbersList[i/2];
+                    answer /= numbersList[i / 2];
                     arithmeticExpression.Append("/" + numbersList[i / 2] + ")");
                 }
                 else if (elements[i] == "^")
                 {
-                    answer = Math.Pow(answer, numbersList[i/2]);
+                    answer = Math.Pow(answer, numbersList[i / 2]);
                     arithmeticExpression.Append("^" + numbersList[i / 2] + ")");
                 }
-               else
+                else
                 {
                     return "Invalid Expression";
                 }
-               
+
             }
 
             arithmeticExpression.Remove(arithmeticExpression.Length, 1);
             arithmeticExpression.Append("=" + answer);
 
             return arithmeticExpression.ToString();
-
         }
     }
 }
