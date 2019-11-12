@@ -233,12 +233,12 @@ namespace MP2
             {
                 x = NewtonRaphson(guess,epsilon,10);
 
-                if (x != double.NaN)
+                if (!double.IsNaN(x))
                 {
                     result.Add(x);
                 }
             }
-
+            return result;
             // YUDAN
         }
 
