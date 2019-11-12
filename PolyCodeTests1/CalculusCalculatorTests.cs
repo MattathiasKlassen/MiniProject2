@@ -70,7 +70,7 @@ namespace MP2.Tests
 
         }
 
-        /*
+        
         [TestMethod]
         [ExpectedException(typeof(System.InvalidOperationException))]
         public void GetRootsTest2()
@@ -78,9 +78,14 @@ namespace MP2.Tests
             List<double> calculatedRoots = new List<double> { };
             List<double> expectedRoots = new List<double> { -0.5, 0.5 };
 
+            polynomialtest = "1 0 0";
+
             calculatedRoots = calculusTests.GetAllRoots(0.0001);
 
+            Assert.AreEqual(calculatedRoots, expectedRoots);
+
         }
-        */
+        
+
     }
 }
