@@ -11,10 +11,16 @@ namespace MP2.Tests
     [TestClass()]
     public class CalculusCalculatorTests
     {
+        string polynomial = "2 3 4";
+        List<double> coefficientList = new List<double>() { 2, 3, 4 };
+
         [TestMethod()]
         public void SetPolynomialTest()
         {
             Assert.Fail();
         }
+
+
+       
     }
 }

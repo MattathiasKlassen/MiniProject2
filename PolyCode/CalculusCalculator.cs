@@ -199,7 +199,7 @@ namespace MP2
                 return double.NaN;
             }
 
-            return Math.Round(x, 4); //4 decimal places
+            return Math.Round(x, 2); 
             
         }
 
