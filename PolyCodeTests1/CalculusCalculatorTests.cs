@@ -13,6 +13,10 @@ namespace MP2.Tests
     {
         CalculusCalculator tests = new CalculusCalculator();
 
+        string polynomialtest = string.Empty;
+        List<double> coefficientList = new List<double>();
+
+
         [TestMethod()]
         public void IsValidTest1()
         {
@@ -51,10 +55,12 @@ namespace MP2.Tests
         [TestMethod]
         public void GetRootsTest1()
         {
-            List<double> calculatedRoots = new List<double>;
-            List<double> expectedRoots = new List<double>;
+            List<double> calculatedRoots = new List<double> { };
+            List<double> expectedRoots = new List<double> {-0.5, 0.5 };
 
-            //calculatedRoots = CalculusCalculator.GetAllRoots(0.0001);
+            calculatedRoots = tests.GetAllRoots(0.0001);
+
+            Assert.AreEqual(calculatedRoots, expectedRoots);
 
         }
 
