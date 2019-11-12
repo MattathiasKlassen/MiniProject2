@@ -186,6 +186,7 @@ namespace MP2
         {
             int count = 0;
             double x = guess;
+            Console.WriteLine (guess);
 
             while (Math.Abs(EvaluatePolynomial(x)) > epsilon && count < iterationMax)
             {
@@ -220,7 +221,7 @@ namespace MP2
         public List<double> GetAllRoots(double epsilon) 
         {
 
-            if (coefficientList.Count == 0)
+            if (polynomial.Length == 0)
             {
                 throw new InvalidOperationException("No polynomial is set.");
             }
@@ -229,9 +230,9 @@ namespace MP2
             List<double> result = new List<double>();
 
 
-            for(double guess = -50.0;guess<=50; guess+=0.5) //What does "step is-0.5" mean
+            for(double guess = -50.0; guess <= 50; guess = guess + 0.5) //What does "step is-0.5" mean
             {
-                x = NewtonRaphson(guess,epsilon,10);
+                x = NewtonRaphson(guess, epsilon, 10);
 
                 if (!double.IsNaN(x))
                 {
@@ -260,24 +261,18 @@ namespace MP2
         public double EvaluatePolynomialDerivative(double x)
         {
             double result = 0;
-            double xMultiply;
+            
             double order = coefficientList.Count - 1;
 
-            if (coefficientList.Count == 0) //polynomial field is empty??????
+            if (polynomial.Length == 0) //polynomial field is empty??????
             {
                 throw new InvalidOperationException ("No polymial is set.");
             }
             
             for (int i = 0; i < order; i++)
             {
-                int count = 0;
-                xMultiply = 1.0;
-                while(count < order - i - 1)
-                {
-                    xMultiply *= x;
-                    count ++;
-                }
-                result += coefficientList [i] * (order - i) * xMultiply;
+               
+                result += coefficientList [i] * (order - i) * Math.Pow(x, order - i - 1);
             }
             return result;
         }
@@ -303,34 +298,16 @@ namespace MP2
 
             double Fa = 0;
             double Fb = 0;
-            double aMultiply;
-            double bMultiply;
             double order = coefficientList.Count - 1;
 
             for (int i = 0; i <= order; i++)
             {
-                int count = 0;
-                aMultiply = 1.0;
-                while (count <= order - i)
-                {
-                    aMultiply *= a;
-                    count++;
-                }
-                Fa += coefficientList[i] / (order - i + 1) * aMultiply;
+                
+                Fa += coefficientList[i] / (order - i + 1) * Math.Pow(a, order - i + 1);
+                Fb += coefficientList[i] / (order - i + 1) * Math.Pow(b, order - i + 1);
             }
 
-            for (int j = 0; j <= order; j++)
-            {
-                int count = 0;
-                bMultiply = 1.0;
-                while (count <= order - j)
-                {
-                    bMultiply *= b;
-                    count++;
-                }
-                Fb += coefficientList[j] / (order - j + 1) * bMultiply;
-            }
-
+            
 
             return Fb - Fa;
 
