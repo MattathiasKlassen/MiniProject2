@@ -38,23 +38,11 @@ namespace MP2
             {
                 string[] elements = polynomial.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                for (int i = 0; i<elements.Length; i++)
+                foreach( string element in elements)
                 {
-                    coefficientList.Add(Double.Parse(elements[i].ToString()));
+                    coefficientList.Add(Double.Parse(element));
                 }
-                //for (int i = 0; i < polynomial.Length; i++)
-                //{
-                //    if (polynomial[i] != ' ')
-                //    {
-                //        number.Append(polynomial[i]);
-                //    }
-                //    else if (polynomial[i] == ' ' && number.Length>0)
-                //    {
-                //        coefficientList.Add(Double.Parse(number.ToString()));
-                //        number.Clear();
-                //    }
-                //}
-                //coefficientList.Add(Double.Parse(number.ToString()));
+
             }
             else
             {
@@ -108,7 +96,7 @@ namespace MP2
         {
             if (polynomial == "")
             {
-                throw new InvalidCastException("No Polynomial is set");
+                throw new InvalidOperationException("No Polynomial is set");
             }
             else
             {
@@ -122,16 +110,29 @@ namespace MP2
                     {
                         if (i == 0)
                         {
-                            poly.Append($" ({coefficientList[j]})");
+                            if (i != length -1)
+                            {
+                                poly.Append(" + ");
+                            }
+
+                            poly.Append($"({coefficientList[j]})");
+
                         }
-                        else if (i == 1)
+                        else if (i == 1 && i != length - 1)
                         {
-                            poly.Append($"({coefficientList[j]})*x");
+                            poly.Append($" + ({coefficientList[j]})*x");
+                        }
+                        
+                        else if (i != length - 1)
+                        {
+                            poly.Append($" + ({coefficientList[j]})*x^{i}");
                         }
                         else
                         {
-                            poly.Append($"({coefficientList[j]})*x^{i} ");
+                            poly.Append($"({coefficientList[j]})*x^{i}");
+
                         }
+
                     }
                     j++;
                 }
@@ -152,21 +153,22 @@ namespace MP2
         {
             if (polynomial == "")
             {
-                throw new InvalidCastException("No Polynomial is set");
+                throw new InvalidOperationException("No Polynomial is set");
             }
-            else
-            {
-                double evaluation = 0;
-                int j = 0;
+            
+            double evaluation = 0;
+            int j = 0;
 
-                for (int i = coefficientList.Count - 1; i >= 0; i--)
-                {
-                    evaluation += (coefficientList[j]) * Math.Pow(x, i);
-                    j++;
-                }
-                return evaluation;
+            for (int i = coefficientList.Count - 1; i >= 0; i--)
+            {
+                evaluation += (coefficientList[j]) * Math.Pow(x, i);
+                j++;
+             }
+
+            return evaluation;
+
             }
-        }
+        
 
         /// <summary>
         /// Finds a root of this polynomial using the provided guess.
@@ -186,7 +188,6 @@ namespace MP2
         {
             int count = 0;
             double x = guess;
-            Console.WriteLine (guess);
 
             while (Math.Abs(EvaluatePolynomial(x)) > epsilon && count < iterationMax)
             {
@@ -199,7 +200,7 @@ namespace MP2
                 return double.NaN;
             }
 
-            return Math.Round(x, 2); 
+            return Math.Round(x, 2);
             
         }
 
@@ -221,18 +222,18 @@ namespace MP2
         public List<double> GetAllRoots(double epsilon) 
         {
 
-            if (polynomial.Length == 0)
+            if (polynomial == "")
             {
                 throw new InvalidOperationException("No polynomial is set.");
             }
 
             double x;
+            int maxIterations = 10;
             List<double> result = new List<double>();
 
-
-            for(double guess = -50.0; guess <= 50; guess = guess + 0.5) //What does "step is-0.5" mean
+            for (double guess = -50.0; guess <= 50; guess += 0.5) 
             {
-                x = NewtonRaphson(guess, epsilon, 10);
+                x = NewtonRaphson(guess, epsilon, maxIterations);
 
                 if (!double.IsNaN(x))
                 {
@@ -240,10 +241,12 @@ namespace MP2
                     {
                         result.Add(x);
                     }
-                        
+
                 }
- 
+
             }
+
+            
             return result;
         }
 
@@ -261,18 +264,16 @@ namespace MP2
         public double EvaluatePolynomialDerivative(double x)
         {
             double result = 0;
-            
             double order = coefficientList.Count - 1;
 
-            if (polynomial.Length == 0) //polynomial field is empty??????
+            if (polynomial == "") 
             {
                 throw new InvalidOperationException ("No polymial is set.");
             }
             
             for (int i = 0; i < order; i++)
             {
-               
-                result += coefficientList [i] * (order - i) * Math.Pow(x, order - i - 1);
+                result += coefficientList[i] * (order - i) * Math.Pow(x, order - i - 1);
             }
             return result;
         }
@@ -291,6 +292,7 @@ namespace MP2
         /// </exception>
         public double EvaluatePolynomialIntegral(double a, double b)
         {
+
             if (coefficientList.Count == 0) //polynomial field is empty??????
             {
                 throw new InvalidOperationException ("No polymial is set.");
@@ -306,8 +308,6 @@ namespace MP2
                 Fa += coefficientList[i] / (order - i + 1) * Math.Pow(a, order - i + 1);
                 Fb += coefficientList[i] / (order - i + 1) * Math.Pow(b, order - i + 1);
             }
-
-            
 
             return Fb - Fa;
 

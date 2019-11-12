@@ -45,10 +45,23 @@ namespace MP2
 
             List<double> numbersList = new List<double>();
             List<char> operandsList = new List<char>();
+            double number;
 
             StringBuilder arithmeticExpression = new StringBuilder();
 
-            if (!double.TryParse(elements[0], out double number))
+            if (lengthString == 0)
+            {
+                return "Invalid Expression.";
+            }
+            else if (!double.TryParse(elements[0], out double errorTestingNumber) )
+            {
+                return "Invalid Expression.";
+            }
+            else if (double.TryParse(elements[lengthString - 1], out errorTestingNumber) && lengthString > 1)
+            {
+                return "Invalid Expression.";
+            }
+            else if (lengthString % 2 != 1)
             {
                 return "Invalid Expression.";
             }
@@ -58,8 +71,9 @@ namespace MP2
                 {
                     arithmeticExpression.Append("(");
                 }
-                arithmeticExpression.Append(number);
-                answer = number;
+                double.TryParse(elements[0], out errorTestingNumber);
+                arithmeticExpression.Append(errorTestingNumber);
+                answer = errorTestingNumber;
 
             }
 
@@ -76,27 +90,28 @@ namespace MP2
                 if (elements[i] == "+")
                 {
                     answer += numbersList[i / 2];
-                    arithmeticExpression.Append(" +" + numbersList[i / 2] + ")");
+                    arithmeticExpression.Append(" + " + numbersList[i / 2] + ")");
                 }
                 else if (elements[i] == "-")
                 {
                     answer -= numbersList[i / 2];
-                    arithmeticExpression.Append(" -" + numbersList[i / 2] + ")");
+                    arithmeticExpression.Append(" - " + numbersList[i / 2] + ")");
                 }
                 else if (elements[i] == "*")
                 {
                     answer *= numbersList[i / 2];
-                    arithmeticExpression.Append(" *" + numbersList[i / 2] + ")");
+                    arithmeticExpression.Append(" * " + numbersList[i / 2] + ")");
                 }
                 else if (elements[i] == "/")
                 {
+                    // what to do about divide by zero??
                     answer /= numbersList[i / 2];
-                    arithmeticExpression.Append(" /" + numbersList[i / 2] + ")");
+                    arithmeticExpression.Append(" / " + numbersList[i / 2] + ")");
                 }
                 else if (elements[i] == "^")
                 {
                     answer = Math.Pow(answer, numbersList[i / 2]);
-                    arithmeticExpression.Append(" ^" + numbersList[i / 2] + ")");
+                    arithmeticExpression.Append(" ^ " + numbersList[i / 2] + ")");
                 }
                 else
                 {
@@ -105,7 +120,10 @@ namespace MP2
 
             }
 
-            arithmeticExpression.Remove(arithmeticExpression.Length - 1, 1);
+            if (arithmeticExpression[arithmeticExpression.Length - 1] == ')' )
+            {
+                arithmeticExpression.Remove(arithmeticExpression.Length - 1, 1);
+            }
             arithmeticExpression.Append(" = " + answer);
 
             return arithmeticExpression.ToString();
