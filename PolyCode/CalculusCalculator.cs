@@ -235,7 +235,11 @@ namespace MP2
 
                 if (!double.IsNaN(x))
                 {
-                    result.Add(x);
+                    if (!result.Contains(x))
+                    {
+                        result.Add(x);
+                    }
+                        
                 }
  
             }
