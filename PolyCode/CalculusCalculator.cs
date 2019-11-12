@@ -312,5 +312,39 @@ namespace MP2
             return Fb - Fa;
 
         }
+
+
+        /// <summary>
+        /// Sets the polynomial field and the coefficientList field of the object.
+        /// It must use the isValidPolynomial method to check for the validity
+        /// of the polynomial entered by the user, otherwise the fields must 
+        /// not change.
+        /// The acceptable format of the coefficients received from the user is 
+        /// a series of numbers (one for each coefficient) separated by spaces. 
+        /// All coefficients values must be entered even those that are zero.
+        /// </summary>
+        /// <returns>True if the polynomial is succeffully set, false otherwise.</returns>
+        public bool SetPolynomialHelper(string polynomial, List<double> coefficientList)
+        {
+            StringBuilder number = new StringBuilder();
+            coefficientList.Clear();
+
+            if (IsValidPolynomial(polynomial))
+            {
+                string[] elements = polynomial.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                foreach (string element in elements)
+                {
+                    coefficientList.Add(Double.Parse(element));
+                }
+
+            }
+            else
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }
+

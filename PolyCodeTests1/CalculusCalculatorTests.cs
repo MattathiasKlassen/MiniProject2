@@ -12,7 +12,7 @@ namespace MP2.Tests
     public class CalculusCalculatorTests
     {
         CalculusCalculator calculusTests = new CalculusCalculator();
-
+        
         string polynomialtest = string.Empty;
         List<double> coefficientList = new List<double>();
 
@@ -72,20 +72,37 @@ namespace MP2.Tests
 
         
         [TestMethod]
-        [ExpectedException(typeof(System.InvalidOperationException))]
         public void GetRootsTest2()
         {
             List<double> calculatedRoots = new List<double> { };
             List<double> expectedRoots = new List<double> { -0.5, 0.5 };
-
+            
             polynomialtest = "1 0 0";
+            coefficientList = new List<double> { 1, 0, 0 };
 
             calculatedRoots = calculusTests.GetAllRoots(0.0001);
 
             Assert.AreEqual(calculatedRoots, expectedRoots);
 
         }
-        
+
+
+        [TestMethod]
+        public void GetRootsTest3()
+        {
+
+
+        }
+
+        [TestMethod]
+        public void SetPolynomialTest1()
+        {
+
+
+
+        }
+
+
 
     }
 }
