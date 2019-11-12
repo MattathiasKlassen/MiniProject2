@@ -11,10 +11,18 @@ namespace MP2.Tests
     [TestClass()]
     public class CalculusCalculatorTests
     {
+        CalculusCalculator tests = new CalculusCalculator();
+
         [TestMethod()]
-        public void SetPolynomialTest()
+        public void IsValidTest1()
         {
-            Assert.Fail();
+            string polynomialTest1 = "3.0 4 -8.0 0";
+            bool isValid = tests.IsValidPolynomial(polynomialTest1);
+
+            Assert.IsTrue(isValid);
         }
+
+
+
     }
 }

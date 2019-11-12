@@ -56,7 +56,7 @@ namespace MP2
             {
                 for (int j = 0; j < lengthString / 2 - 1; j++)
                 {
-                    arithmeticExpression.Append("(");
+                    arithmeticExpression.Append("( ");
                 }
                 arithmeticExpression.Append(number);
                 answer = number;
@@ -76,27 +76,27 @@ namespace MP2
                 if (elements[i] == "+")
                 {
                     answer += numbersList[i / 2];
-                    arithmeticExpression.Append(" +" + numbersList[i / 2] + ")");
+                    arithmeticExpression.Append(" + " + numbersList[i / 2] + " )");
                 }
                 else if (elements[i] == "-")
                 {
                     answer -= numbersList[i / 2];
-                    arithmeticExpression.Append(" -" + numbersList[i / 2] + ")");
+                    arithmeticExpression.Append(" - " + numbersList[i / 2] + " )");
                 }
                 else if (elements[i] == "*")
                 {
                     answer *= numbersList[i / 2];
-                    arithmeticExpression.Append(" *" + numbersList[i / 2] + ")");
+                    arithmeticExpression.Append(" * " + numbersList[i / 2] + " )");
                 }
                 else if (elements[i] == "/")
                 {
                     answer /= numbersList[i / 2];
-                    arithmeticExpression.Append(" /" + numbersList[i / 2] + ")");
+                    arithmeticExpression.Append(" / " + numbersList[i / 2] + " )");
                 }
                 else if (elements[i] == "^")
                 {
                     answer = Math.Pow(answer, numbersList[i / 2]);
-                    arithmeticExpression.Append(" ^" + numbersList[i / 2] + ")");
+                    arithmeticExpression.Append(" ^ " + numbersList[i / 2] + " )");
                 }
                 else
                 {

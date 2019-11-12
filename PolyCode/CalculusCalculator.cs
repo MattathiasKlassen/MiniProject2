@@ -42,19 +42,6 @@ namespace MP2
                 {
                     coefficientList.Add(Double.Parse(elements[i].ToString()));
                 }
-                //for (int i = 0; i < polynomial.Length; i++)
-                //{
-                //    if (polynomial[i] != ' ')
-                //    {
-                //        number.Append(polynomial[i]);
-                //    }
-                //    else if (polynomial[i] == ' ' && number.Length>0)
-                //    {
-                //        coefficientList.Add(Double.Parse(number.ToString()));
-                //        number.Clear();
-                //    }
-                //}
-                //coefficientList.Add(Double.Parse(number.ToString()));
             }
             else
             {
@@ -229,12 +216,11 @@ namespace MP2
             double x;
             List<double> result = new List<double>();
 
-
             for(double guess = -50.0; guess <= 50; guess = guess + 0.5) //What does "step is-0.5" mean
             {
                 x = NewtonRaphson(guess, epsilon, 10);
 
-                if (!double.IsNaN(x))
+                if (!double.IsNaN(x)) // change this? 
                 {
                     if (!result.Contains(x))
                     {
@@ -261,7 +247,6 @@ namespace MP2
         public double EvaluatePolynomialDerivative(double x)
         {
             double result = 0;
-            
             double order = coefficientList.Count - 1;
 
             if (polynomial.Length == 0) //polynomial field is empty??????
@@ -271,8 +256,7 @@ namespace MP2
             
             for (int i = 0; i < order; i++)
             {
-               
-                result += coefficientList [i] * (order - i) * Math.Pow(x, order - i - 1);
+                result += coefficientList[i] * (order - i) * Math.Pow(x, order - i - 1);
             }
             return result;
         }
@@ -291,6 +275,7 @@ namespace MP2
         /// </exception>
         public double EvaluatePolynomialIntegral(double a, double b)
         {
+
             if (coefficientList.Count == 0) //polynomial field is empty??????
             {
                 throw new InvalidOperationException ("No polymial is set.");
@@ -306,8 +291,6 @@ namespace MP2
                 Fa += coefficientList[i] / (order - i + 1) * Math.Pow(a, order - i + 1);
                 Fb += coefficientList[i] / (order - i + 1) * Math.Pow(b, order - i + 1);
             }
-
-            
 
             return Fb - Fa;
 
