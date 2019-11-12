@@ -200,7 +200,7 @@ namespace MP2
                 return double.NaN;
             }
 
-            return Math.Round(x, 4); //4 decimal places
+            return Math.Round(x, 2);
             
         }
 
@@ -293,7 +293,7 @@ namespace MP2
         public double EvaluatePolynomialIntegral(double a, double b)
         {
 
-            if (coefficientList.Count == 0) //polynomial field is empty??????
+            if (polynomial == "") 
             {
                 throw new InvalidOperationException ("No polymial is set.");
             }
@@ -312,5 +312,21 @@ namespace MP2
             return Fb - Fa;
 
         }
+
+
+        /// <summary>
+        /// Assume parameters of the polynomial string and coefficient list are not 
+        /// empty.
+        /// </summary>
+        /// <param name="coefficientList"></param>
+        /// <param name="polynomial"></param>
+        /// <returns>True if the polynomial is succeffully set, false otherwise.</returns>
+        public void SetPolynomialHelper(string polynomial, List<double> coefficientList)
+        {
+            this.polynomial = polynomial;
+            this.coefficientList = coefficientList;
+
+        }
     }
 }
+
