@@ -110,23 +110,29 @@ namespace MP2
                     {
                         if (i == 0)
                         {
+                            if (i != length -1)
+                            {
+                                poly.Append(" + ");
+                            }
+
                             poly.Append($"({coefficientList[j]})");
+
                         }
-                        else if (i == 1)
+                        else if (i == 1 && i != length - 1)
                         {
-                            poly.Append($"({coefficientList[j]})*x");
+                            poly.Append($" + ({coefficientList[j]})*x");
                         }
                         
+                        else if (i != length - 1)
+                        {
+                            poly.Append($" + ({coefficientList[j]})*x^{i}");
+                        }
                         else
                         {
                             poly.Append($"({coefficientList[j]})*x^{i}");
-                        }
-
-                        if (i != 0)
-                        {
-                            poly.Append(" + ");
 
                         }
+
                     }
                     j++;
                 }
