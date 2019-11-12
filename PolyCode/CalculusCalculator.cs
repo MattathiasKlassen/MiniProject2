@@ -110,15 +110,22 @@ namespace MP2
                     {
                         if (i == 0)
                         {
-                            poly.Append($" ({coefficientList[j]})");
+                            poly.Append($"({coefficientList[j]})");
                         }
                         else if (i == 1)
                         {
                             poly.Append($"({coefficientList[j]})*x");
                         }
+                        
                         else
                         {
-                            poly.Append($"({coefficientList[j]})*x^{i} ");
+                            poly.Append($"({coefficientList[j]})*x^{i}");
+                        }
+
+                        if (i != 0)
+                        {
+                            poly.Append(" + ");
+
                         }
                     }
                     j++;
@@ -142,19 +149,20 @@ namespace MP2
             {
                 throw new InvalidOperationException("No Polynomial is set");
             }
-            else
-            {
-                double evaluation = 0;
-                int j = 0;
+            
+            double evaluation = 0;
+            int j = 0;
 
-                for (int i = coefficientList.Count - 1; i >= 0; i--)
-                {
-                    evaluation += (coefficientList[j]) * Math.Pow(x, i);
-                    j++;
-                }
-                return evaluation;
+            for (int i = coefficientList.Count - 1; i >= 0; i--)
+            {
+                evaluation += (coefficientList[j]) * Math.Pow(x, i);
+                j++;
+             }
+
+            return evaluation;
+
             }
-        }
+        
 
         /// <summary>
         /// Finds a root of this polynomial using the provided guess.
@@ -174,7 +182,6 @@ namespace MP2
         {
             int count = 0;
             double x = guess;
-            Console.WriteLine (guess);
 
             while (Math.Abs(EvaluatePolynomial(x)) > epsilon && count < iterationMax)
             {
@@ -209,28 +216,31 @@ namespace MP2
         public List<double> GetAllRoots(double epsilon) 
         {
 
-            if (polynomial.Length == 0)
+            if (polynomial == "")
             {
                 throw new InvalidOperationException("No polynomial is set.");
             }
 
             double x;
+            int maxIterations = 10;
             List<double> result = new List<double>();
 
-            for(double guess = -50.0; guess <= 50; guess = guess + 0.5) //What does "step is-0.5" mean
+            for (double guess = -50.0; guess <= 50; guess += 0.5) 
             {
-                x = NewtonRaphson(guess, epsilon, 10);
+                x = NewtonRaphson(guess, epsilon, maxIterations);
 
-                if (!double.IsNaN(x)) // change this? 
+                if (!double.IsNaN(x))
                 {
                     if (!result.Contains(x))
                     {
                         result.Add(x);
                     }
-                        
+
                 }
- 
+
             }
+
+            
             return result;
         }
 
@@ -250,7 +260,7 @@ namespace MP2
             double result = 0;
             double order = coefficientList.Count - 1;
 
-            if (polynomial.Length == 0) //polynomial field is empty??????
+            if (polynomial == "") 
             {
                 throw new InvalidOperationException ("No polymial is set.");
             }
