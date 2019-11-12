@@ -75,12 +75,13 @@ namespace MP2.Tests
         public void GetRootsTest2()
         {
             List<double> calculatedRoots = new List<double> { };
-            List<double> expectedRoots = new List<double> { -0.5, 0.5 };
+            List<double> expectedRoots = new List<double> { 0 };
             
-            polynomialtest = "1 0 0";
             coefficientList = new List<double> { 1, 0, 0 };
 
-            calculatedRoots = calculusTests.GetAllRoots(0.0001);
+            calculusTests.SetPolynomialHelper("1 0 0", coefficientList);
+
+            calculatedRoots = calculusTests.GetAllRoots(0.01);
 
             Assert.AreEqual(calculatedRoots, expectedRoots);
 
@@ -90,6 +91,7 @@ namespace MP2.Tests
         [TestMethod]
         public void GetRootsTest3()
         {
+
 
 
         }

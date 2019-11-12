@@ -200,7 +200,7 @@ namespace MP2
                 return double.NaN;
             }
 
-            return Math.Round(x, 4); //4 decimal places
+            return Math.Round(x, 2);
             
         }
 
@@ -315,35 +315,16 @@ namespace MP2
 
 
         /// <summary>
-        /// Sets the polynomial field and the coefficientList field of the object.
-        /// It must use the isValidPolynomial method to check for the validity
-        /// of the polynomial entered by the user, otherwise the fields must 
-        /// not change.
-        /// The acceptable format of the coefficients received from the user is 
-        /// a series of numbers (one for each coefficient) separated by spaces. 
-        /// All coefficients values must be entered even those that are zero.
+        /// 
         /// </summary>
+        /// <param name="coefficientList"></param>
+        /// <param name="polynomial"></param>
         /// <returns>True if the polynomial is succeffully set, false otherwise.</returns>
-        public bool SetPolynomialHelper(string polynomial, List<double> coefficientList)
+        public void SetPolynomialHelper(string polynomial, List<double> coefficientList)
         {
-            StringBuilder number = new StringBuilder();
-            coefficientList.Clear();
+            this.polynomial = polynomial;
+            this.coefficientList = coefficientList;
 
-            if (IsValidPolynomial(polynomial))
-            {
-                string[] elements = polynomial.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-                foreach (string element in elements)
-                {
-                    coefficientList.Add(Double.Parse(element));
-                }
-
-            }
-            else
-            {
-                return false;
-            }
-            return true;
         }
     }
 }
