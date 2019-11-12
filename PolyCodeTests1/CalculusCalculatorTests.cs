@@ -77,34 +77,85 @@ namespace MP2.Tests
             List<double> calculatedRoots = new List<double> { };
             List<double> expectedRoots = new List<double> { 0 };
             
-            coefficientList = new List<double> { 1, 0, 0 };
+            coefficientList = new List<double> { 1, 0, 0};
 
             calculusTests.SetPolynomialHelper("1 0 0", coefficientList);
+            calculatedRoots = calculusTests.GetAllRoots(0.00001);
 
-            calculatedRoots = calculusTests.GetAllRoots(0.01);
-
-            Assert.AreEqual(calculatedRoots, expectedRoots);
+            Assert.AreEqual(calculatedRoots[0], expectedRoots[0]);
 
         }
 
 
         [TestMethod]
-        public void GetRootsTest3()
+        public void EvaluateTest1()
         {
 
-
+            coefficientList = new List<double> { 2, 3, 0};
+            calculusTests.SetPolynomialHelper("2 3 0", coefficientList);
+        
+            double result = calculusTests.EvaluatePolynomial(2);
+            Assert.AreEqual(result, 14);
 
         }
 
         [TestMethod]
-        public void SetPolynomialTest1()
+        public void EvaluateTest2()
         {
 
+            coefficientList = new List<double> { 1, -4, 4 };
+            calculusTests.SetPolynomialHelper(" 1 -4 4", coefficientList);
 
+            double result = calculusTests.EvaluatePolynomial(2);
+            Assert.AreEqual(result, 0);
+
+        }
+
+        [TestMethod]
+        public void IntegralTest1()
+        {
+            coefficientList = new List<double> { 4, 3, 0, 5 };
+            calculusTests.SetPolynomialHelper(" 4 3 0 5", coefficientList);
+            double integral = calculusTests.EvaluatePolynomialIntegral(0, 1);
+
+            Assert.AreEqual(integral, 7);
 
         }
 
 
+        [TestMethod]
+        public void IntegralTest2()
+        {
+            coefficientList = new List<double> {0, 0, -1, 2, -4 };
+            calculusTests.SetPolynomialHelper(" 0 0 -1 2 -4", coefficientList);
+            double integral = calculusTests.EvaluatePolynomialIntegral(2, 4);
+
+            Assert.AreEqual(integral, -14.67, 0.01);
+
+        }
+
+
+        [TestMethod]
+        public void DerivativeTest1()
+        {
+            coefficientList = new List<double> { 4, 3, 0, 5 };
+            calculusTests.SetPolynomialHelper(" 4 3 0 5", coefficientList);
+            double derivative = calculusTests.EvaluatePolynomialDerivative(1);
+
+            Assert.AreEqual(derivative, 18);
+
+        }
+
+        [TestMethod]
+        public void DerivativeTest2()
+        {
+            coefficientList = new List<double> { 1 };
+            calculusTests.SetPolynomialHelper(" 1 ", coefficientList);
+            double derivative = calculusTests.EvaluatePolynomialDerivative(10000);
+
+            Assert.AreEqual(derivative, 0);
+
+        }
 
     }
 }

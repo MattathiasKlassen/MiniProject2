@@ -245,7 +245,6 @@ namespace MP2
                 }
 
             }
-
             
             return result;
         }
@@ -293,7 +292,7 @@ namespace MP2
         public double EvaluatePolynomialIntegral(double a, double b)
         {
 
-            if (coefficientList.Count == 0) //polynomial field is empty??????
+            if (polynomial == "") 
             {
                 throw new InvalidOperationException ("No polymial is set.");
             }
@@ -315,7 +314,8 @@ namespace MP2
 
 
         /// <summary>
-        /// 
+        /// Assume parameters of the polynomial string and coefficient list are not 
+        /// empty.
         /// </summary>
         /// <param name="coefficientList"></param>
         /// <param name="polynomial"></param>
