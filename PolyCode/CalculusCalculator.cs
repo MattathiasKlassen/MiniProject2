@@ -38,10 +38,11 @@ namespace MP2
             {
                 string[] elements = polynomial.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                for (int i = 0; i<elements.Length; i++)
+                foreach( string element in elements)
                 {
-                    coefficientList.Add(Double.Parse(elements[i].ToString()));
+                    coefficientList.Add(Double.Parse(element));
                 }
+
             }
             else
             {
@@ -95,7 +96,7 @@ namespace MP2
         {
             if (polynomial == "")
             {
-                throw new InvalidCastException("No Polynomial is set");
+                throw new InvalidOperationException("No Polynomial is set");
             }
             else
             {
@@ -139,7 +140,7 @@ namespace MP2
         {
             if (polynomial == "")
             {
-                throw new InvalidCastException("No Polynomial is set");
+                throw new InvalidOperationException("No Polynomial is set");
             }
             else
             {
