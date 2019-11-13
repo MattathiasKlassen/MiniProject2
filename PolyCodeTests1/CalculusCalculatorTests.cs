@@ -57,7 +57,34 @@ namespace MP2.Tests
         [ExpectedException(typeof(System.InvalidOperationException))]
         public void GetPolynomialStringTest1()
         {
+            calculusTests.SetPolynomialHelper(polynomialtest, coefficientList);
             calculusTests.GetPolynomialString();
+
+        }
+
+        [TestMethod()]
+        public void GetPolynomialStringTest2()
+        {
+            List<double> coeffs = new List<double> { 2, 3, 0, 5 };
+            calculusTests.SetPolynomialHelper("2 3 0 5", coeffs);
+
+            string expectedPolynomial = calculusTests.GetPolynomialString();
+            string actualPolynomial = "(2)*x^3 + (3)*x^2 + (5)";
+
+            Assert.AreEqual(expectedPolynomial, actualPolynomial);
+
+        }
+
+        [TestMethod()]
+        public void GetPolynomialStringTest3()
+        {
+            List<double> coeffs = new List<double> { 0, 0, 0 };
+            calculusTests.SetPolynomialHelper("0 0 0", coeffs);
+
+            string expectedPolynomial = calculusTests.GetPolynomialString();
+            string actualPolynomial = "";
+
+            Assert.AreEqual(expectedPolynomial, actualPolynomial);
 
         }
 
@@ -65,8 +92,8 @@ namespace MP2.Tests
         [ExpectedException(typeof(System.InvalidOperationException))]
         public void GetRootsTest1()
         {
-            List<double> calculatedRoots = new List<double> { };
-            calculatedRoots = calculusTests.GetAllRoots(0.0001);
+            calculusTests.SetPolynomialHelper(polynomialtest, coefficientList);
+            List<double >calculatedRoots = calculusTests.GetAllRoots(0.0001);
 
         }
 
@@ -83,6 +110,20 @@ namespace MP2.Tests
             calculatedRoots = calculusTests.GetAllRoots(0.00001);
 
             Assert.AreEqual(calculatedRoots[0], expectedRoots[0]);
+
+        }
+
+        [TestMethod]
+        public void GetRootsTest3()
+        {
+            List<double> calculatedRoots = new List<double> { };
+
+            coefficientList = new List<double> { 3, 5, 5 };
+
+            calculusTests.SetPolynomialHelper("3 5 5", coefficientList);
+            calculatedRoots = calculusTests.GetAllRoots(0.00001);
+
+            Assert.AreEqual(calculatedRoots.Count, 0);
 
         }
 
@@ -108,6 +149,16 @@ namespace MP2.Tests
 
             double result = calculusTests.EvaluatePolynomial(2);
             Assert.AreEqual(result, 0);
+
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(System.InvalidOperationException))]
+        public void EvaluateTest3()
+        {
+
+            calculusTests.SetPolynomialHelper(polynomialtest, coefficientList);
+            double result = calculusTests.EvaluatePolynomial(2);
 
         }
 
