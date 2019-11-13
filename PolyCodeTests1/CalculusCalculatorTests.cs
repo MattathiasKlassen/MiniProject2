@@ -12,11 +12,11 @@ namespace MP2.Tests
     public class CalculusCalculatorTests
     {
         CalculusCalculator calculusTests = new CalculusCalculator();
-        
+
         string polynomialtest = string.Empty;
         List<double> coefficientList = new List<double>();
 
-       
+
         [TestMethod()]
         public void IsValidTest1()
         {
@@ -58,7 +58,7 @@ namespace MP2.Tests
         public void GetPolynomialStringTest1()
         {
             calculusTests.GetPolynomialString();
-            
+
         }
 
         [TestMethod]
@@ -70,14 +70,14 @@ namespace MP2.Tests
 
         }
 
-        
+
         [TestMethod]
         public void GetRootsTest2()
         {
             List<double> calculatedRoots = new List<double> { };
             List<double> expectedRoots = new List<double> { 0 };
-            
-            coefficientList = new List<double> { 1, 0, 0};
+
+            coefficientList = new List<double> { 1, 0, 0 };
 
             calculusTests.SetPolynomialHelper("1 0 0", coefficientList);
             calculatedRoots = calculusTests.GetAllRoots(0.00001);
@@ -91,9 +91,9 @@ namespace MP2.Tests
         public void EvaluateTest1()
         {
 
-            coefficientList = new List<double> { 2, 3, 0};
+            coefficientList = new List<double> { 2, 3, 0 };
             calculusTests.SetPolynomialHelper("2 3 0", coefficientList);
-        
+
             double result = calculusTests.EvaluatePolynomial(2);
             Assert.AreEqual(result, 14);
 
@@ -126,11 +126,21 @@ namespace MP2.Tests
         [TestMethod]
         public void IntegralTest2()
         {
-            coefficientList = new List<double> {0, 0, -1, 2, -4 };
+            coefficientList = new List<double> { 0, 0, -1, 2, -4 };
             calculusTests.SetPolynomialHelper(" 0 0 -1 2 -4", coefficientList);
             double integral = calculusTests.EvaluatePolynomialIntegral(2, 4);
 
             Assert.AreEqual(integral, -14.67, 0.01);
+
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(System.InvalidOperationException))]
+        public void IntegralTest3()
+        {
+            coefficientList = new List<double>() { };
+            calculusTests.SetPolynomialHelper("", coefficientList);
+            calculusTests.EvaluatePolynomialIntegral(2, 4);
 
         }
 
@@ -157,5 +167,14 @@ namespace MP2.Tests
 
         }
 
+        [TestMethod()]
+        [ExpectedException(typeof(System.InvalidOperationException))]
+        public void DerivativeTest3()
+        {
+            coefficientList = new List<double>() { };
+            calculusTests.SetPolynomialHelper("", coefficientList);
+            calculusTests.EvaluatePolynomialDerivative(1);
+
+        }
     }
 }
